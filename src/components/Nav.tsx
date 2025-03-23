@@ -21,7 +21,7 @@ function Nav() {
         </Link>
       </Col>
       <Col xs="auto">
-        <Button onClick={handleLogout} type="button">Logout</Button> {/* Logout button */}
+        <Button onClick={handleLogout} type="button">Logout <i className="fa-solid fa-right-from-bracket"></i></Button> {/* Logout button */}
       </Col>
     </Navbar>
   );

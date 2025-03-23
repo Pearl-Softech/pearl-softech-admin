@@ -129,12 +129,12 @@ function Blog() {
             <Card.Body>
               <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formBlogTitle" className="mb-3">
-                  <Form.Label><i className="fas fa-heading me-2"></i>Blog Title</Form.Label>
+                  <Form.Label className='fw-bold'><i className="fas fa-heading me-2"></i>Blog Title</Form.Label>
                   <Form.Control type="text" placeholder="Enter blog title" name="title" value={title} onChange={handleChange} required />
                 </Form.Group>
 
                 <Form.Group controlId="formBlogThumbnail" className="mb-3">
-                  <Form.Label><i className="fas fa-image me-2"></i>Blog Thumbnail</Form.Label>
+                  <Form.Label className='fw-bold'><i className="fas fa-image me-2"></i>Blog Thumbnail</Form.Label>
                   <Form.Control type="file" accept="image/*" onChange={handleFileChange} required />
                   {thumbnail && (
                     <img src={thumbnail} alt="Thumbnail Preview" className="mt-3" style={{ maxWidth: '100%', maxHeight: '200px', objectFit: 'cover' }} />
@@ -142,7 +142,7 @@ function Blog() {
                 </Form.Group>
 
                 <Form.Group controlId="formBlogBody" className="mb-3">
-                  <Form.Label><i className="fas fa-align-left me-2"></i>Blog Body</Form.Label>
+                  <Form.Label className='fw-bold'><i className="fas fa-align-left me-2"></i>Blog Body</Form.Label>
                   <Form.Control as="textarea" rows={5} placeholder="Enter blog body" name="body" value={body} onChange={handleChange} required />
                 </Form.Group>
 
