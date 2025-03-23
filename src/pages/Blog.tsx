@@ -144,6 +144,13 @@ function Blog() {
         </Button>
       </div>
 
+      {
+        blogs.length !== 0 ?
+          null
+          :
+          <h2 style={{ width: "100%", textAlign: "center"}}>Loading..</h2>
+      }
+
       {/* Flexbox Layout for Form and Cards */}
       <div className="d-flex justify-content-center align-items-center position-relative">
         {/* Show the Add Blog Form when showForm is true */}
