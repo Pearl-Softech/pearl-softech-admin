@@ -116,7 +116,7 @@ function Blog() {
 
       {blogs.length === 0 ? (
         <div style={{height:"50dvh", width:"100%", display:'flex', alignItems:'center', justifyContent:'center'}}>
-          <h2 style={{ width: "100%", textAlign: "center" }}>Loading{loadingDots}</h2>
+          <h2 style={{ width: "100%", textAlign: "center" }}>LOADING{loadingDots}</h2>
         </div>
       ) : null}
 
