@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Button, Container, Row, Col, Form, Alert } from 'react-bootstrap'; // Added Alert for success/error messages
-import { Link, useNavigate } from 'react-router-dom'; // Link for navigation
+import { Link } from 'react-router-dom'; // Link for navigation
 
 function Blog() {
+  const API_KEY = import.meta.env.VITE_API_KEY;
+  const SERVER_IP = import.meta.env.VITE_SERVER_IP;
   const [blogs, setBlogs] = useState([]); // Initialize as empty array
   const [title, setTitle] = useState('');
   const [thumbnail, setThumbnail] = useState('');
@@ -15,12 +17,12 @@ function Blog() {
     const content = {
       method: 'GET', // GET request
       headers: {
-        'x-api-key': 'abc'
+        'x-api-key': API_KEY
       }
     };
     const fetchBlogs = async () => {
       try {
-        const response = await fetch('http://192.168.1.64:8080/get-blogs', content); // API endpoint to get blogs
+        const response = await fetch(`${SERVER_IP}:8080/get-blogs`, content); // API endpoint to get blogs
         const data = await response.json();
         if (response.ok) {
           setBlogs(data.blogs); // Assuming the API returns a 'blogs' array
