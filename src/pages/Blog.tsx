@@ -115,8 +115,8 @@ function Blog() {
       </div>
 
       {blogs.length === 0 ? (
-        <div style={{height:"50dvh", width:"100%", display:'flex', alignItems:'center', justifyContent:'center'}}>
-          <h2 style={{ width: "100%", textAlign: "center" }}>LOADING{loadingDots}</h2>
+        <div style={{ height: "50dvh", width: "100%", display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <h3 style={{ width: "100%", textAlign: "center", fontWeight: "bolder" }}>LOADING{loadingDots}</h3>
         </div>
       ) : null}
 
@@ -167,6 +167,8 @@ function Blog() {
                     <Card.Subtitle className="mb-2 text-muted d-flex align-items-center">
                       <i className="fa-solid fa-calendar-days me-2"></i>
                       {new Date(blog.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                      <i className='fa-solid fa-eye' style={{marginLeft: "20px", marginRight: "8px"}}></i>
+                      {blog.views + " Views"}
                     </Card.Subtitle>
                     <Card.Text>
                       {blog.body.length > 100 ? blog.body.substring(0, 100) + '...' : blog.body}
