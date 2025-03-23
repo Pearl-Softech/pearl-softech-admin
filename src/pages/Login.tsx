@@ -81,7 +81,7 @@ const Login = () => {
               <Form.Label>Key</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter your key"
+                placeholder="Enter Admin key"
                 value={key}
                 onChange={handleChange}
                 required
