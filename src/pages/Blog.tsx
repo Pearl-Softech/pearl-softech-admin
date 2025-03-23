@@ -12,6 +12,7 @@ function Blog() {
   const [showForm, setShowForm] = useState(false); // State to toggle form visibility
   const [successMessage, setSuccessMessage] = useState(''); // Success message state
   const [errorMessage, setErrorMessage] = useState(''); // Error message state
+  const [refress, setRefress] = useState(true);
 
   useEffect(() => {
     const content = {
@@ -35,7 +36,7 @@ function Blog() {
     };
 
     fetchBlogs();
-  });
+  }, [refress]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -80,6 +81,7 @@ function Blog() {
         setThumbnail("");
         setBody("");
         setShowForm(false); // Hide the form
+        setRefress(!refress);
       } else {
         console.error('Error creating blog');
       }
@@ -104,6 +106,7 @@ function Blog() {
       if (res.ok) {
         setSuccessMessage(data.message || 'Blog deleted successfully!');
         setErrorMessage('');
+        setRefress(!refress);
       } else {
         setErrorMessage(data.message || 'Failed to delete blog.');
         setSuccessMessage('');
