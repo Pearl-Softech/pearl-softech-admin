@@ -64,7 +64,7 @@ function Blog() {
       method: 'POST', // POST request
       headers: {
         'Content-Type': 'application/json', // Tell the server we're sending JSON
-        'x-api-key': 'abc'
+        'x-api-key': API_KEY
       },
       body: JSON.stringify({
         title,
@@ -74,7 +74,7 @@ function Blog() {
     };
 
     try {
-      let res = await fetch("http://192.168.1.64:8080/add-blog", content); // Send data to API
+      let res = await fetch(`${SERVER_IP}:8080/add-blog`, content); // Send data to API
       if (res.ok) {
         setTitle("");
         setThumbnail("");
@@ -93,12 +93,12 @@ function Blog() {
     const content = {
       method: 'DELETE', // DELETE request
       headers: {
-        'x-api-key': 'abc'
+        'x-api-key': API_KEY
       }
     };
 
     try {
-      const res = await fetch(`http://192.168.1.64:8080/delete-blog/${id}`, content); // Delete API call
+      const res = await fetch(`${SERVER_IP}:8080/delete-blog/${id}`, content); // Delete API call
       const data = await res.json();
 
       if (res.ok) {

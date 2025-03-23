@@ -47,7 +47,7 @@ const Login = () => {
 
       if (response.ok) {
         const data = await response.json(); // Parse the response if request is successful
-        console.log('Login successful:', data);
+        //console.log('Login successful:', data);
 
         // Save the JWT token in localStorage
         localStorage.setItem('jwt', data.payload);
