@@ -286,6 +286,27 @@ function Career() {
           </Card.Body>
         </Card>
       )}
+
+      {/* List */}
+      {!showAddForm && !showEditForm && (
+        <Row className="g-4 justify-content-center pt-4">
+          {careers.map(career => (
+            <Col md={4} key={career._id}>
+              <Card>
+                <Card.Body>
+                  <Card.Title>{career.title}</Card.Title>
+                  <Card.Subtitle className="mb-2 text-muted">{career.deadline}</Card.Subtitle>
+                  <Card.Text>{career.description}</Card.Text>
+                  <div className="d-flex justify-content-between">
+                    <Button variant="success" onClick={() => handleEdit(career)}><i className="fas fa-edit me-2"></i>Edit</Button>
+                    <Button variant="danger" onClick={() => handleDelete(career._id)}><i className="fas fa-trash me-2"></i>Delete</Button>
+                  </div>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      )}
     </Container>
   );
 }
