@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Button, Container, Row, Col, Form, Alert } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { PulseLoader } from 'react-spinners';
 
 function Career() {
@@ -68,11 +69,19 @@ function Career() {
     }
   };
 
+  const handleRemoveQualification = (index) => {
+    setQualification(qualification.filter((_, i) => i !== index));
+  };
+
   const handleAddSkill = () => {
     if (skillInput.trim()) {
       setRequiredSkills([...requiredSkills, skillInput.trim()]);
       setSkillInput('');
     }
+  };
+
+  const handleRemoveSkill = (index) => {
+    setRequiredSkills(requiredSkills.filter((_, i) => i !== index));
   };
 
   const handleTagChange = (tag) => {
@@ -83,6 +92,11 @@ function Career() {
   const handleAddSubmit = async (e) => {
     e.preventDefault();
     setLoadingAdd(true);
+    if (qualification.length === 0 || requiredSkills.length === 0 || tags.length === 0) {
+      setErrorMessage('Please add at least one qualification, skill, and tag.');
+      setLoadingAdd(false);
+      return;
+    }
     try {
       const res = await fetch(`${SERVER_IP}:8080/add-career`, {
         method: 'POST',
@@ -212,7 +226,11 @@ function Career() {
                   <Form.Control placeholder="Add qualification" value={qualificationInput} onChange={e => setQualificationInput(e.target.value)} />
                   <Button variant="success" onClick={handleAddQualification}>Add</Button>
                 </div>
-                <ul>{qualification.map((q, idx) => <li key={idx}>{q}</li>)}</ul>
+                <ul className='p-3'>{qualification.map((q, idx) => (
+                  <li key={idx}>
+                    {q} <Button variant="danger" onClick={() => handleRemoveQualification(idx)}>&times;</Button>
+                  </li>
+                ))}</ul>
               </Form.Group>
 
               {/* Required Skills */}
@@ -224,7 +242,11 @@ function Career() {
                   <Form.Control placeholder="Add skill" value={skillInput} onChange={e => setSkillInput(e.target.value)} />
                   <Button variant="success" onClick={handleAddSkill}>Add</Button>
                 </div>
-                <ul>{requiredSkills.map((s, idx) => <li key={idx}>{s}</li>)}</ul>
+                <ul className='p-3'>{requiredSkills.map((s, idx) => (
+                  <li key={idx}>
+                    {s} <Button variant="danger" onClick={() => handleRemoveSkill(idx)}>&times;</Button>
+                  </li>
+                ))}</ul>
               </Form.Group>
 
               {/* Tags */}
@@ -242,7 +264,7 @@ function Career() {
                 <Form.Label className="fw-bold">
                   <i className="fas fa-briefcase me-2"></i> Type
                 </Form.Label>
-                <Form.Select value={type} onChange={e => setType(e.target.value)}>
+                <Form.Select value={type} onChange={e => setType(e.target.value)} required>
                   <option>Full Time</option>
                   <option>Part Time</option>
                 </Form.Select>
@@ -253,7 +275,7 @@ function Career() {
                 <Form.Label className="fw-bold">
                   <i className="fas fa-laptop me-2"></i> Work Mode
                 </Form.Label>
-                <Form.Select value={workMode} onChange={e => setWorkMode(e.target.value)}>
+                <Form.Select value={workMode} onChange={e => setWorkMode(e.target.value)} required>
                   <option>Onsite</option>
                   <option>Remote</option>
                 </Form.Select>
@@ -264,7 +286,7 @@ function Career() {
                 <Form.Label className="fw-bold">
                   <i className="fas fa-level-up-alt me-2"></i> Job Level
                 </Form.Label>
-                <Form.Select value={jobLevel} onChange={e => setJobLevel(e.target.value)}>
+                <Form.Select value={jobLevel} onChange={e => setJobLevel(e.target.value)} required>
                   <option>Entry Level</option>
                   <option>Mid Level</option>
                   <option>Senior</option>
@@ -276,37 +298,40 @@ function Career() {
                 <Form.Label className="fw-bold">
                   <i className="fas fa-dollar-sign me-2"></i> Salary
                 </Form.Label>
-                <Form.Control placeholder="Enter salary" value={salary} onChange={e => setSalary(e.target.value)} />
+                <Form.Control placeholder="Enter salary" value={salary} onChange={e => setSalary(e.target.value)} required />
               </Form.Group>
 
-              <Button variant="primary" type="submit" disabled={loadingAdd || loadingUpdate}>
-                {loadingAdd || loadingUpdate ? <PulseLoader size={10} color="#fff" /> : showAddForm ? 'Add Career' : 'Update Career'}
-              </Button>
+              <div className="d-flex gap-2">
+                <Button variant="primary" type="submit" disabled={loadingAdd || loadingUpdate}>
+                  {loadingAdd || loadingUpdate ? <PulseLoader size={8} color="#fff" /> : showAddForm ? 'Add Career' : 'Update Career'}
+                </Button>
+              </div>
             </Form>
           </Card.Body>
         </Card>
       )}
 
-      {/* List */}
-      {!showAddForm && !showEditForm && (
-        <Row className="g-4 justify-content-center pt-4">
-          {careers.map(career => (
-            <Col md={4} key={career._id}>
-              <Card>
-                <Card.Body>
+      {/* Displaying careers */}
+      <Row>
+        {careers.map((career) => (
+          <Col key={career._id} sm={12} md={6} lg={4} className="mb-4">
+            <Card>
+              <Card.Body>
+                <Link to={"https://pearlsoftech.com/career/" + career._id} style={{ color: "black", textDecoration: "none" }}>
                   <Card.Title>{career.title}</Card.Title>
-                  <Card.Subtitle className="mb-2 text-muted">{career.deadline}</Card.Subtitle>
                   <Card.Text>{career.description}</Card.Text>
-                  <div className="d-flex justify-content-between">
-                    <Button variant="success" onClick={() => handleEdit(career)}><i className="fas fa-edit me-2"></i>Edit</Button>
-                    <Button variant="danger" onClick={() => handleDelete(career._id)}><i className="fas fa-trash me-2"></i>Delete</Button>
-                  </div>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
-        </Row>
-      )}
+                </Link>
+                <Button variant="primary" onClick={() => handleEdit(career)}>
+                  Edit
+                </Button>
+                <Button variant="danger" onClick={() => handleDelete(career._id)}>
+                  Delete
+                </Button>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
     </Container>
   );
 }
