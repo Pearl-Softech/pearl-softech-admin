@@ -155,7 +155,7 @@ function Career() {
 
   return (
     <Container className="my-4">
-      <h1 className="text-center mb-4">Career Management</h1>
+      <h1 className="text-center mb-4"><i className="fas fa-briefcase me-2"></i> Career Management</h1>
 
       {successMessage && <Alert variant="success">{successMessage}</Alert>}
       {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
@@ -280,7 +280,7 @@ function Career() {
               </Form.Group>
 
               <Button variant="primary" type="submit" disabled={loadingAdd || loadingUpdate}>
-                {loadingAdd || loadingUpdate ? <PulseLoader size={10} /> : showAddForm ? 'Add Career' : 'Update Career'}
+                {loadingAdd || loadingUpdate ? <PulseLoader size={10} color="#fff" /> : showAddForm ? 'Add Career' : 'Update Career'}
               </Button>
             </Form>
           </Card.Body>
