@@ -146,7 +146,7 @@ function Blog() {
       {/* Loading when blogs are fetching */}
       {blogs.length === 0 && !showAddForm && !showEditForm ? (
         <div style={{ height: "50dvh" }} className="d-flex align-items-center justify-content-center">
-          <PulseLoader/>
+          <PulseLoader />
         </div>
       ) : null}
 
@@ -159,18 +159,21 @@ function Blog() {
           <Card.Body>
             <Form onSubmit={handleAddSubmit}>
               <Form.Group className="mb-3">
-                <Form.Label>Blog Title</Form.Label>
+                <i className='fa-solid fa-heading me-2'></i>
+                <Form.Label className='fw-bold'>Blog Title</Form.Label>
                 <Form.Control type="text" value={title} onChange={e => setTitle(e.target.value)} required />
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label>Thumbnail</Form.Label>
+                <i className='fa-solid fa-image me-2'></i>
+                <Form.Label className='fw-bold'>Thumbnail</Form.Label>
                 <Form.Control type="file" accept="image/*" onChange={e => handleFileChange(e)} required />
                 {thumbnail && <img src={thumbnail} alt="Preview" className="mt-3" style={{ width: '100%', height: '200px', objectFit: 'cover' }} />}
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label>Body</Form.Label>
+                <i className='fa-solid fa-align-left me-2'></i>
+                <Form.Label className='fw-bold'>Body</Form.Label>
                 <Form.Control as="textarea" rows={5} value={body} onChange={e => setBody(e.target.value)} required />
               </Form.Group>
 
@@ -193,18 +196,21 @@ function Blog() {
           <Card.Body>
             <Form onSubmit={handleUpdateSubmit}>
               <Form.Group className="mb-3">
-                <Form.Label>Blog Title</Form.Label>
+                <i className='fa-solid fa-heading me-2'></i>
+                <Form.Label className='fw-bold'>Blog Title</Form.Label>
                 <Form.Control type="text" value={title} onChange={e => setTitle(e.target.value)} required />
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label>Thumbnail</Form.Label>
+                <i className='fa-solid fa-image me-2'></i>
+                <Form.Label className='fw-bold'>Thumbnail</Form.Label>
                 <Form.Control type="file" accept="image/*" onChange={e => handleFileChange(e, true)} />
                 {editThumbnail && <img src={editThumbnail} alt="Preview" className="mt-3" style={{ width: '100%', height: '200px', objectFit: 'cover' }} />}
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label>Body</Form.Label>
+                <i className='fa-solid fa-align-left me-2'></i>
+                <Form.Label className='fw-bold'>Body</Form.Label>
                 <Form.Control as="textarea" rows={5} value={body} onChange={e => setBody(e.target.value)} required />
               </Form.Group>
 
@@ -231,7 +237,7 @@ function Blog() {
                   <Card.Title>{blog.title}</Card.Title>
                   <Card.Subtitle className="mb-2 text-muted">
                     <i className="fa-solid fa-calendar-days me-2"></i>
-                    {new Date(blog.createdAt).toLocaleDateString()} | 
+                    {new Date(blog.createdAt).toLocaleDateString()} |
                     <i className='fa-solid fa-eye ms-3 me-1'></i>{blog.views} Views
                   </Card.Subtitle>
                   <Card.Text>{blog.body.length > 100 ? blog.body.substring(0, 100) + '...' : blog.body}</Card.Text>
