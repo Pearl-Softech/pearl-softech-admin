@@ -161,21 +161,40 @@ function Blog() {
               <Form.Group className="mb-3">
                 <i className='fa-solid fa-heading me-2'></i>
                 <Form.Label className='fw-bold'>Blog Title</Form.Label>
-                <Form.Control type="text" value={title} onChange={e => setTitle(e.target.value)} required />
+                <Form.Control
+                  type="text"
+                  value={title}
+                  onChange={e => setTitle(e.target.value)}
+                  required
+                  placeholder="Enter blog title"
+                />
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <i className='fa-solid fa-image me-2'></i>
                 <Form.Label className='fw-bold'>Thumbnail</Form.Label>
-                <Form.Control type="file" accept="image/*" onChange={e => handleFileChange(e)} required />
+                <Form.Control
+                  type="file"
+                  accept="image/*"
+                  onChange={e => handleFileChange(e)}
+                  required
+                />
                 {thumbnail && <img src={thumbnail} alt="Preview" className="mt-3" style={{ width: '100%', height: '200px', objectFit: 'cover' }} />}
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <i className='fa-solid fa-align-left me-2'></i>
                 <Form.Label className='fw-bold'>Body</Form.Label>
-                <Form.Control as="textarea" rows={5} value={body} onChange={e => setBody(e.target.value)} required />
+                <Form.Control
+                  as="textarea"
+                  rows={5}
+                  value={body}
+                  onChange={e => setBody(e.target.value)}
+                  required
+                  placeholder="Enter blog body"
+                />
               </Form.Group>
+
 
               <div className="text-center">
                 <Button variant="primary" type="submit" disabled={loadingAdd}>
@@ -198,21 +217,40 @@ function Blog() {
               <Form.Group className="mb-3">
                 <i className='fa-solid fa-heading me-2'></i>
                 <Form.Label className='fw-bold'>Blog Title</Form.Label>
-                <Form.Control type="text" value={title} onChange={e => setTitle(e.target.value)} required />
+                <Form.Control
+                  type="text"
+                  value={title}
+                  onChange={e => setTitle(e.target.value)}
+                  required
+                  placeholder="Edit blog title"
+                />
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <i className='fa-solid fa-image me-2'></i>
                 <Form.Label className='fw-bold'>Thumbnail</Form.Label>
-                <Form.Control type="file" accept="image/*" onChange={e => handleFileChange(e, true)} />
+                <Form.Control
+                  type="file"
+                  accept="image/*"
+                  onChange={e => handleFileChange(e, true)}
+                  placeholder="Upload a new thumbnail (optional)"
+                />
                 {editThumbnail && <img src={editThumbnail} alt="Preview" className="mt-3" style={{ width: '100%', height: '200px', objectFit: 'cover' }} />}
               </Form.Group>
 
               <Form.Group className="mb-3">
                 <i className='fa-solid fa-align-left me-2'></i>
                 <Form.Label className='fw-bold'>Body</Form.Label>
-                <Form.Control as="textarea" rows={5} value={body} onChange={e => setBody(e.target.value)} required />
+                <Form.Control
+                  as="textarea"
+                  rows={5}
+                  value={body}
+                  onChange={e => setBody(e.target.value)}
+                  required
+                  placeholder="Edit blog body"
+                />
               </Form.Group>
+
 
               <div className="text-center">
                 <Button variant="success" type="submit" disabled={loadingUpdate}>
