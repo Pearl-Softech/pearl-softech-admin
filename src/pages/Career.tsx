@@ -283,6 +283,7 @@ function Career() {
                   <option>Entry Level</option>
                   <option>Mid Level</option>
                   <option>Senior</option>
+                  <option>Intern</option>
                 </Form.Select>
               </Form.Group>
 
