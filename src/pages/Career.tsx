@@ -210,13 +210,6 @@ function Career() {
                 <Form.Control as="textarea" rows={3} placeholder="Enter job description" value={description} onChange={e => setDescription(e.target.value)} required />
               </Form.Group>
 
-              <Form.Group className="mb-3">
-                <Form.Label className="fw-bold">
-                  <i className="fas fa-calendar-alt me-2"></i> Deadline
-                </Form.Label>
-                <Form.Control type="date" value={deadline} onChange={e => setDeadline(e.target.value)} required />
-              </Form.Group>
-
               {/* Qualification */}
               <Form.Group className="mb-3">
                 <Form.Label className="fw-bold">
@@ -312,26 +305,30 @@ function Career() {
       )}
 
       {/* Displaying careers */}
-      <Row>
-        {careers.map((career) => (
-          <Col key={career._id} sm={12} md={6} lg={4} className="mb-4">
-            <Card>
-              <Card.Body>
-                <Link to={"https://pearlsoftech.com/career/" + career._id} style={{ color: "black", textDecoration: "none" }}>
-                  <Card.Title>{career.title}</Card.Title>
-                  <Card.Text>{career.description}</Card.Text>
-                </Link>
-                <Button variant="primary" onClick={() => handleEdit(career)}>
-                  Edit
-                </Button>
-                <Button variant="danger" onClick={() => handleDelete(career._id)}>
-                  Delete
-                </Button>
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+      {!showAddForm && !showEditForm && (
+        <Row>
+          {careers.map((career) => (
+            <Col key={career._id} sm={12} md={6} lg={4} className="mb-4">
+              <Card>
+                <Card.Body>
+                  <Link to={"https://pearlsoftech.com/career/" + career._id} style={{ color: "black", textDecoration: "none" }}>
+                    <Card.Title>{career.title}</Card.Title>
+                    {/* Remove description */}
+                  </Link>
+                  <div className="d-flex justify-content-between">
+                    <Button variant="primary" onClick={() => handleEdit(career)}>
+                      Edit
+                    </Button>
+                    <Button variant="danger" onClick={() => handleDelete(career._id)}>
+                      Delete
+                    </Button>
+                  </div>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      )}
     </Container>
   );
 }
