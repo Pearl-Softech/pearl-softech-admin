@@ -262,7 +262,7 @@ function Career() {
                 <Form.Label className="fw-bold">
                   <i className="fas fa-tags me-2"></i> Tags
                 </Form.Label><br />
-                {['Software Development', 'Digital Marketing', 'Web Development'].map(tag => (
+                {['Software Development', 'Digital Marketing', 'Web Development', 'UI/UX'].map(tag => (
                   <Form.Check key={tag} inline label={tag} type="checkbox" checked={tags.includes(tag)} onChange={() => handleTagChange(tag)} />
                 ))}
               </Form.Group>
