@@ -208,7 +208,7 @@ function Blog() {
 
       {/* Edit Blog Form */}
       {showEditForm && (
-        <Card className="p-4 shadow-lg w-100 mx-auto" style={{ maxWidth: '600px' }}>
+        <Card className="p-4 shadow-lg w-100 mx-auto" style={{ maxWidth: '750px' }}>
           <Button variant="danger" className="position-absolute top-0 end-0 m-2" onClick={() => { setShowEditForm(false); resetForm(); }}>
             <i className="fas fa-times"></i>
           </Button>
@@ -243,7 +243,7 @@ function Blog() {
                 <Form.Label className='fw-bold'>Body</Form.Label>
                 <Form.Control
                   as="textarea"
-                  rows={5}
+                  rows={6}
                   value={body}
                   onChange={e => setBody(e.target.value)}
                   required
