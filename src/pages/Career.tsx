@@ -116,6 +116,7 @@ function Career() {
     }
   };
 
+
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this job post?")) return;
     try {
@@ -167,6 +168,7 @@ function Career() {
     }
   };
 
+
   return (
     <Container className="my-4">
       <h1 className="text-center mb-4"><i className="fas fa-briefcase me-2"></i> Career Management</h1>
@@ -209,6 +211,19 @@ function Career() {
                 </Form.Label>
                 <Form.Control as="textarea" rows={3} placeholder="Enter job description" value={description} onChange={e => setDescription(e.target.value)} required />
               </Form.Group>
+
+              <Form.Group className="mb-3">
+                <Form.Label className="fw-bold">
+                  <i className="fas fa-calendar me-2"></i> Deadline
+                </Form.Label>
+                <Form.Control
+                  type="date"
+                  value={deadline}
+                  onChange={(e) => setDeadline(e.target.value)}
+                  required
+                />
+              </Form.Group>
+
 
               {/* Qualification */}
               <Form.Group className="mb-3">
