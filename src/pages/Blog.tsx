@@ -25,7 +25,10 @@ function Blog() {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const res = await fetch(`${SERVER_IP}:8080/get-blogs`, { method: 'GET', headers: { 'x-api-key': API_KEY } });
+        const res = await fetch(`${SERVER_IP}:8080/get-blogs`, {
+          method: 'GET',
+          headers: { 'x-api-key': API_KEY }
+        });
         const data = await res.json();
         if (res.ok) setBlogs(data.blogs);
         else console.error('Failed to fetch blogs');
@@ -83,7 +86,10 @@ function Blog() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this blog?")) return;
     try {
-      const res = await fetch(`${SERVER_IP}:8080/delete-blog/${id}`, { method: 'DELETE', headers: { 'x-api-key': API_KEY } });
+      const res = await fetch(`${SERVER_IP}:8080/delete-blog/${id}`, {
+        method: 'DELETE',
+        headers: { 'x-api-key': API_KEY }
+      });
       const data = await res.json();
       if (res.ok) {
         setSuccessMessage(data.message || 'Blog deleted successfully!');
@@ -130,16 +136,24 @@ function Blog() {
 
   return (
     <Container className="my-4">
-      <h1 className="text-center mb-4"><i className="fas fa-blog me-2"></i> Blog Management</h1>
+      <h1 className="text-center mb-4">
+        <i className="fas fa-blog me-2"></i> Blog Management
+      </h1>
 
       {successMessage && <Alert variant="success">{successMessage}</Alert>}
       {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
 
-      <div className="text-end mb-4">
+      {/* Link to Blog Body Guide Component */}
+      <div>
         {!showAddForm && !showEditForm && (
-          <Button variant="primary" onClick={() => setShowAddForm(true)}>
-            <i className="fas fa-plus me-2"></i> Add Blog
-          </Button>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: 'center' }}>
+            <Link to="/blog-body-guide">
+              Blog Body Styling Guide
+            </Link>
+            <Button variant="primary" onClick={() => setShowAddForm(true)} className='me-2'>
+              <i className="fas fa-plus me-2"></i> Add Blog
+            </Button>
+          </div>
         )}
       </div>
 
@@ -194,7 +208,6 @@ function Blog() {
                   placeholder="Enter blog body"
                 />
               </Form.Group>
-
 
               <div className="text-center">
                 <Button variant="primary" type="submit" disabled={loadingAdd}>
@@ -251,7 +264,6 @@ function Blog() {
                 />
               </Form.Group>
 
-
               <div className="text-center">
                 <Button variant="success" type="submit" disabled={loadingUpdate}>
                   {loadingUpdate ? <PulseLoader size={8} color="#fff" /> : 'Update Blog'}
@@ -278,7 +290,9 @@ function Blog() {
                     {new Date(blog.createdAt).toLocaleDateString()} |
                     <i className='fa-solid fa-eye ms-3 me-1'></i>{blog.views} Views
                   </Card.Subtitle>
-                  <Card.Text>{blog.body.length > 100 ? blog.body.substring(0, 100) + '...' : blog.body}</Card.Text>
+                  <Card.Text>
+                    {blog.body.length > 100 ? blog.body.substring(0, 100) + '...' : blog.body}
+                  </Card.Text>
                   <div className="d-flex justify-content-between">
                     <Button variant="success" onClick={() => handleEdit(blog)}>
                       <i className="fas fa-edit me-2"></i>Edit

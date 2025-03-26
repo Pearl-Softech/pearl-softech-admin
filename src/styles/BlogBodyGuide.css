@@ -1,0 +1,63 @@
+/* BlogBodyGuide.css */
+.guide-container {
+    padding: 20px;
+    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.header {
+    color: #333;
+    font-size: 28px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.title {
+    color: #007bff;
+    font-size: 22px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.guide-section {
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 16px;
+    color: #555;
+}
+
+code {
+    background-color: #f0f0f0;
+    padding: 4px 8px;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+pre code {
+    background-color: #f4f4f4;
+    padding: 8px;
+    display: block;
+    border-radius: 4px;
+    font-size: 14px;
+    white-space: pre-wrap;
+}
+
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.guide-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}

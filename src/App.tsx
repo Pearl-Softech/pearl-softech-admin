@@ -6,6 +6,7 @@ import Blog from './pages/Blog';
 import Career from './pages/Career';
 import Nav from './components/Nav';
 import JWTPolice from './utils/JWTPolice';
+import BlogBodyGuide from './pages/BlogBodyGuide';
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/career" element={<Career />} />
+          <Route path='/blog-body-guide' element={<BlogBodyGuide />} />
         </Routes>
       </main>
     </BrowserRouter>
