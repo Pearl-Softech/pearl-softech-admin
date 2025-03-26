@@ -114,6 +114,30 @@ const BlogBodyGuide = () => {
             </section>
 
             <section className="guide-section">
+                <div className="title">12. Inserting Audio</div>
+                <p><strong>Audio:</strong> Use the <code>&lt;audio&gt;</code> tag to add audio to your blog. You can provide a source file and add controls for play/pause.</p>
+                <p>Example: <code>&lt;audio controls&gt;&lt;source src="audio-file.mp3" type="audio/mp3"&gt;&lt;/audio&gt;</code></p>
+                <p><strong>Result:</strong></p>
+                <audio controls>
+                    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3" />
+                    Your browser does not support the audio element.
+                </audio>
+            </section>
+
+            <section className="guide-section">
+                <div className="title">13. Inserting Video</div>
+                <p><strong>Video:</strong> Use the <code>&lt;video&gt;</code> tag to add a video to your blog. You can provide a source file and add controls for play/pause.</p>
+                <p>Example: <code>&lt;video controls&gt;&lt;source src="video-file.mp4" type="video/mp4"&gt;&lt;/video&gt;</code></p>
+                <p><strong>Result:</strong></p>
+                <video controls width="300">
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+                    Your browser does not support the video element.
+                </video>
+            </section>
+
+
+
+            <section className="guide-section">
                 <div className="reference-guide">
                     <p style={{ textAlign: 'center' }}>For more references and detailed guides, visit: <a href="https://www.w3schools.com/html/" target="_blank" rel="noopener noreferrer">W3Schools HTML Tutorial</a></p>
                 </div>
