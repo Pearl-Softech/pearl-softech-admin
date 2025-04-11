@@ -32,7 +32,7 @@ function Career() {
   useEffect(() => {
     const fetchCareers = async () => {
       try {
-        const res = await fetch(`${SERVER_IP}:8080/get-careers`, {
+        const res = await fetch(`${SERVER_IP}/get-careers`, {
           method: 'GET',
           headers: { 'x-api-key': API_KEY },
         });
@@ -98,7 +98,7 @@ function Career() {
       return;
     }
     try {
-      const res = await fetch(`${SERVER_IP}:8080/add-career`, {
+      const res = await fetch(`${SERVER_IP}/add-career`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-api-key': API_KEY },
         body: JSON.stringify({ title, description, deadline, qualification, requiredSkills, tags, type, workMode, jobLevel, salary }),
@@ -120,7 +120,7 @@ function Career() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this job post?")) return;
     try {
-      const res = await fetch(`${SERVER_IP}:8080/delete-career/${id}`, { method: 'DELETE', headers: { 'x-api-key': API_KEY } });
+      const res = await fetch(`${SERVER_IP}/delete-career/${id}`, { method: 'DELETE', headers: { 'x-api-key': API_KEY } });
       const data = await res.json();
       if (res.ok) {
         setSuccessMessage(data.message || 'Career deleted successfully!');
@@ -150,7 +150,7 @@ function Career() {
     e.preventDefault();
     setLoadingUpdate(true);
     try {
-      const res = await fetch(`${SERVER_IP}:8080/update-career/${editCareerId}`, {
+      const res = await fetch(`${SERVER_IP}/update-career/${editCareerId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', 'x-api-key': API_KEY },
         body: JSON.stringify({ title, description, deadline, qualification, requiredSkills, tags, type, workMode, jobLevel, salary }),
