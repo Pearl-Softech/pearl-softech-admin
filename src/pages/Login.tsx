@@ -36,7 +36,7 @@ const Login = () => {
 
     try {
       // Send POST request to /login endpoint
-      const response = await fetch(`${SERVER_IP}:8080/login`, {
+      const response = await fetch(`${SERVER_IP}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json', // Set content type to JSON
