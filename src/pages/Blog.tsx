@@ -25,7 +25,7 @@ function Blog() {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const res = await fetch(`${SERVER_IP}:8080/get-blogs`, {
+        const res = await fetch(`${SERVER_IP}/get-blogs`, {
           method: 'GET',
           headers: { 'x-api-key': API_KEY }
         });
@@ -62,7 +62,7 @@ function Blog() {
     e.preventDefault();
     setLoadingAdd(true);
     try {
-      const res = await fetch(`${SERVER_IP}:8080/add-blog`, {
+      const res = await fetch(`${SERVER_IP}/add-blog`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'x-api-key': API_KEY },
         body: JSON.stringify({ title, thumbnail, body }),
@@ -86,7 +86,7 @@ function Blog() {
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this blog?")) return;
     try {
-      const res = await fetch(`${SERVER_IP}:8080/delete-blog/${id}`, {
+      const res = await fetch(`${SERVER_IP}/delete-blog/${id}`, {
         method: 'DELETE',
         headers: { 'x-api-key': API_KEY }
       });
@@ -114,7 +114,7 @@ function Blog() {
     e.preventDefault();
     setLoadingUpdate(true);
     try {
-      const res = await fetch(`${SERVER_IP}:8080/update-blog/${editBlogId}`, {
+      const res = await fetch(`${SERVER_IP}/update-blog/${editBlogId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', 'x-api-key': API_KEY },
         body: JSON.stringify({ title, thumbnail: editThumbnail, body }),
