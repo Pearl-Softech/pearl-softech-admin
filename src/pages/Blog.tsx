@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Button, Container, Row, Col, Form, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { PulseLoader } from 'react-spinners';
-import JoditEditor from 'jodit-react';
 
 function Blog() {
   const API_KEY = import.meta.env.VITE_API_KEY;
@@ -22,8 +21,7 @@ function Blog() {
   const [editBlogId, setEditBlogId] = useState('');
   const [editThumbnail, setEditThumbnail] = useState('');
 
-  const editor = useRef(null);
-
+  // Fetch blogs
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
@@ -49,6 +47,7 @@ function Blog() {
     setEditThumbnail('');
   };
 
+  // Handle image selection
   const handleFileChange = (e, isEdit = false) => {
     const file = e.target.files[0];
     if (file) {
@@ -58,6 +57,7 @@ function Blog() {
     }
   };
 
+  // Add Blog
   const handleAddSubmit = async (e) => {
     e.preventDefault();
     setLoadingAdd(true);
@@ -82,6 +82,7 @@ function Blog() {
     }
   };
 
+  // Delete Blog
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this blog?")) return;
     try {
@@ -99,6 +100,7 @@ function Blog() {
     }
   };
 
+  // Open Edit Form
   const handleEdit = (blog) => {
     setEditBlogId(blog._id);
     setTitle(blog.title);
@@ -107,6 +109,7 @@ function Blog() {
     setShowEditForm(true);
   };
 
+  // Update Blog
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
     setLoadingUpdate(true);
@@ -140,15 +143,21 @@ function Blog() {
       {successMessage && <Alert variant="success">{successMessage}</Alert>}
       {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
 
-      {!showAddForm && !showEditForm && (
-        <div className="d-flex justify-content-between align-items-center mb-3">
-          <Link to="/blog-body-guide">Blog Body Styling Guide</Link>
-          <Button variant="primary" onClick={() => setShowAddForm(true)} className='me-2'>
-            <i className="fas fa-plus me-2"></i> Add Blog
-          </Button>
-        </div>
-      )}
+      {/* Link to Blog Body Guide Component */}
+      <div>
+        {!showAddForm && !showEditForm && (
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: 'center' }}>
+            <Link to="/blog-body-guide">
+              Blog Body Styling Guide
+            </Link>
+            <Button variant="primary" onClick={() => setShowAddForm(true)} className='me-2'>
+              <i className="fas fa-plus me-2"></i> Add Blog
+            </Button>
+          </div>
+        )}
+      </div>
 
+      {/* Loading when blogs are fetching */}
       {blogs.length === 0 && !showAddForm && !showEditForm ? (
         <div style={{ height: "50dvh" }} className="d-flex align-items-center justify-content-center">
           <PulseLoader />
@@ -157,24 +166,27 @@ function Blog() {
 
       {/* Add Blog Form */}
       {showAddForm && (
-        <Card className="p-4 shadow-lg w-100 mx-auto" style={{ maxWidth: '700px' }}>
+        <Card className="p-4 shadow-lg w-100 mx-auto" style={{ maxWidth: '600px' }}>
           <Button variant="danger" className="position-absolute top-0 end-0 m-2" onClick={() => { setShowAddForm(false); resetForm(); }}>
             <i className="fas fa-times"></i>
           </Button>
           <Card.Body>
             <Form onSubmit={handleAddSubmit}>
               <Form.Group className="mb-3">
-                <Form.Label><i className='fa-solid fa-heading me-2'></i>Title</Form.Label>
+                <i className='fa-solid fa-heading me-2'></i>
+                <Form.Label className='fw-bold'>Blog Title</Form.Label>
                 <Form.Control
                   type="text"
                   value={title}
                   onChange={e => setTitle(e.target.value)}
                   required
+                  placeholder="Enter blog title"
                 />
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label><i className='fa-solid fa-image me-2'></i>Thumbnail</Form.Label>
+                <i className='fa-solid fa-image me-2'></i>
+                <Form.Label className='fw-bold'>Thumbnail</Form.Label>
                 <Form.Control
                   type="file"
                   accept="image/*"
@@ -185,18 +197,15 @@ function Blog() {
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label><i className='fa-solid fa-align-left me-2'></i>Body</Form.Label>
-                <JoditEditor
-                  ref={editor}
+                <i className='fa-solid fa-align-left me-2'></i>
+                <Form.Label className='fw-bold'>Body</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={5}
                   value={body}
-                  tabIndex={1}
-                  onBlur={newContent => setBody(newContent)}
-                  config={{
-                    readonly: false,
-                    height: 300,
-                    uploader: { insertImageAsBase64URI: true },
-                    toolbarSticky: false
-                  }}
+                  onChange={e => setBody(e.target.value)}
+                  required
+                  placeholder="Enter blog body"
                 />
               </Form.Group>
 
@@ -219,38 +228,39 @@ function Blog() {
           <Card.Body>
             <Form onSubmit={handleUpdateSubmit}>
               <Form.Group className="mb-3">
-                <Form.Label><i className='fa-solid fa-heading me-2'></i>Title</Form.Label>
+                <i className='fa-solid fa-heading me-2'></i>
+                <Form.Label className='fw-bold'>Blog Title</Form.Label>
                 <Form.Control
                   type="text"
                   value={title}
                   onChange={e => setTitle(e.target.value)}
                   required
+                  placeholder="Edit blog title"
                 />
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label><i className='fa-solid fa-image me-2'></i>Thumbnail</Form.Label>
+                <i className='fa-solid fa-image me-2'></i>
+                <Form.Label className='fw-bold'>Thumbnail</Form.Label>
                 <Form.Control
                   type="file"
                   accept="image/*"
                   onChange={e => handleFileChange(e, true)}
+                  placeholder="Upload a new thumbnail (optional)"
                 />
                 {editThumbnail && <img src={editThumbnail} alt="Preview" className="mt-3" style={{ width: '100%', height: '200px', objectFit: 'cover' }} />}
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label><i className='fa-solid fa-align-left me-2'></i>Body</Form.Label>
-                <JoditEditor
-                  ref={editor}
+                <i className='fa-solid fa-align-left me-2'></i>
+                <Form.Label className='fw-bold'>Body</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={6}
                   value={body}
-                  tabIndex={1}
-                  onBlur={newContent => setBody(newContent)}
-                  config={{
-                    readonly: false,
-                    height: 300,
-                    uploader: { insertImageAsBase64URI: true },
-                    toolbarSticky: false
-                  }}
+                  onChange={e => setBody(e.target.value)}
+                  required
+                  placeholder="Edit blog body"
                 />
               </Form.Group>
 
@@ -280,11 +290,9 @@ function Blog() {
                     {new Date(blog.createdAt).toLocaleDateString()} |
                     <i className='fa-solid fa-eye ms-3 me-1'></i>{blog.views} Views
                   </Card.Subtitle>
-                  <Card.Text
-                    dangerouslySetInnerHTML={{
-                      __html: blog.body.length > 100 ? blog.body.substring(0, 100) + '...' : blog.body
-                    }}
-                  />
+                  <Card.Text>
+                    {blog.body.length > 100 ? blog.body.substring(0, 100) + '...' : blog.body}
+                  </Card.Text>
                   <div className="d-flex justify-content-between">
                     <Button variant="success" onClick={() => handleEdit(blog)}>
                       <i className="fas fa-edit me-2"></i>Edit
